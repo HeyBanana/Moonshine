@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4299382353562903146}
   - component: {fileID: 1666654711828579269}
   - component: {fileID: 2286682378862843856}
-  - component: {fileID: 6928723835563546660}
+  - component: {fileID: 6006508127563091053}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -63,10 +63,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 0}
-  characterController: {fileID: 6928723835563546660}
+  characterController: {fileID: 6006508127563091053}
   gravity: -9.8
   animator: {fileID: 5204229691368014668}
---- !u!143 &6928723835563546660
+--- !u!143 &6006508127563091053
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
