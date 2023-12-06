@@ -6,8 +6,15 @@ using UnityEngine;
 public class Revolver : Gun
 
 {
+   
+
+
+
     public override void Reload()
     {
-        throw new System.NotImplementedException();
+        reason = 5 - magazine;
+        magazine = 5;
+        int result = maxMagazine - reason;
+        maxMagazine = result;
     }
 }
