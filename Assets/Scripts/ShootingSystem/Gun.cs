@@ -9,34 +9,45 @@ public abstract class Gun : MonoBehaviour
     
     [SerializeField] protected float bulletSpeed;
     [SerializeField] protected bool IsReloading;
-    [SerializeField] protected int magazine; // current amount bullets in the gun
-    [SerializeField] protected int maxMagazine; // amount bullets which has 
+    [SerializeField] protected int currentAmmo; // current amount bullets in the gun
+    [SerializeField] protected int maxAmmo; // 
+    [SerializeField] protected int magazine;
     [SerializeField] protected float damage;
     [SerializeField] protected float reloadTime;
     [SerializeField] protected Transform gunPointer;
     [SerializeField] protected Rigidbody bulletPrefab;
     [SerializeField] protected float delay;
-     protected float currentDelay;
-     protected int reason; // difference between full magazine and some bullets we shooted
+        protected float currentDelay;
+        protected int reason; // difference between full magazine and some bullets we shooted
+        protected bool isReloading = false;
+        protected int result;
+
 
 
     private void Update()
     {
-
+        if (isReloading)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.R) && maxAmmo > 0 )
+        {
+            StartCoroutine(Reload());
+            Debug.Log($"maxAmmo {maxAmmo}");
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
-            Debug.Log(magazine);
+            Debug.Log(currentAmmo);
+            
         }
         else
         {
             currentDelay -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && maxMagazine > 0)
-        {
-            Reload();
-        }
+        
 
     }
    
@@ -49,10 +60,25 @@ public abstract class Gun : MonoBehaviour
         Rigidbody bulletInstance = Instantiate(bulletPrefab, gunPointer.position, gunPointer.rotation);
         bulletInstance.velocity = gunPointer.forward * bulletSpeed;
         currentDelay = delay;
+        currentAmmo--;
        
     }
 
-    public abstract void Reload();
+    public IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading");
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = magazine;
+        isReloading = false;
+        reason = maxAmmo - currentAmmo;
+        maxAmmo = reason;
+
+        
+
+
+
+    }
 
     
 

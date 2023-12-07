@@ -626,13 +626,12 @@ MonoBehaviour:
   IsReloading: 0
   magazine: 5
   maxMagazine: 30
-  reason: 0
   damage: 1
   reloadTime: 2
-  lastTimeShoot: 0.5
   gunPointer: {fileID: 159160391}
   bulletPrefab: {fileID: 2390117949808333237, guid: be70f7fc3971fcb4287b6520062f9ff9,
     type: 3}
+  delay: 0.5
 --- !u!1 &2064454865
 GameObject:
   m_ObjectHideFlags: 0
