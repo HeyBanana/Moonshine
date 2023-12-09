@@ -20,7 +20,7 @@ public abstract class Gun : MonoBehaviour
         protected float currentDelay;
         protected int reason; // difference between full magazine and some bullets we shooted
         protected bool isReloading = false;
-        protected int result;
+        protected int residue; //difference between full magazine and some bullets we shooted
 
 
 
@@ -36,7 +36,7 @@ public abstract class Gun : MonoBehaviour
             Debug.Log($"maxAmmo {maxAmmo}");
             return;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && currentAmmo>0)
         {
             Shoot();
             Debug.Log(currentAmmo);
@@ -69,12 +69,12 @@ public abstract class Gun : MonoBehaviour
         isReloading = true;
         Debug.Log("Reloading");
         yield return new WaitForSeconds(reloadTime);
+        reason = magazine - currentAmmo;
+        residue = maxAmmo - reason;
+        maxAmmo = residue;
         currentAmmo = magazine;
         isReloading = false;
-        reason = maxAmmo - currentAmmo;
-        maxAmmo = reason;
 
-        
 
 
 
