@@ -12,6 +12,7 @@ namespace Moonshine.Player.MovementState
         [SerializeField] private GameInput gameInput;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private float gravity = -9.8f;
+        [SerializeField] private float animationTransitionSpeed = 10f;
         [SerializeField] private Animator animator;
 
         private float moveSpeed = 3f;
@@ -49,18 +50,22 @@ namespace Moonshine.Player.MovementState
 
             movementVector = moveDirection.normalized * moveSpeed * Time.fixedDeltaTime;
             movementVector.y = GetGravityValue();
-
             characterController.Move(movementVector);
 
             currentMovementState.UpdateState(this);
-
             HandleAnimations();
         }
 
         private void HandleAnimations()
         {
-            animator.SetFloat(HorizontalMovementAnimationParameter, inputVector.x);
-            animator.SetFloat(VerticalMovementAnimationParameter, inputVector.y);
+            var currentHorizontalValue = animator.GetFloat(HorizontalMovementAnimationParameter);
+            var currentVerticalValue = animator.GetFloat(VerticalMovementAnimationParameter);
+
+            var horizontalValue = Mathf.Lerp(currentHorizontalValue, inputVector.x, Time.fixedDeltaTime * animationTransitionSpeed);
+            var verticalValue = Mathf.Lerp(currentVerticalValue, inputVector.y, Time.fixedDeltaTime * animationTransitionSpeed);
+
+            animator.SetFloat(HorizontalMovementAnimationParameter, horizontalValue);
+            animator.SetFloat(VerticalMovementAnimationParameter, verticalValue);
         }
 
         public void SwitchState(MovementBaseState state)

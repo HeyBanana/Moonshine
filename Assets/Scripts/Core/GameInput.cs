@@ -23,8 +23,6 @@ namespace Moonshine.Core
             return inputVector;
         }
 
-        public bool IsRunPressed() => playerInputActions.Player.Run.IsInProgress();
-
-        public bool IsRunReleased() => playerInputActions.Player.Run.IsInProgress() == false;
+        public bool IsRunPressed() => playerInputActions.Player.Run.IsPressed();
     }
 }

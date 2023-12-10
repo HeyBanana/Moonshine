@@ -1,4 +1,5 @@
 using Moonshine.Core;
+using UnityEngine;
 
 namespace Moonshine.Player.MovementState.States
 {
@@ -6,8 +7,8 @@ namespace Moonshine.Player.MovementState.States
     {
         private const string RunAnimationParameter = "running";
 
-        private float runSpeed = 6f;
-        private float runBackwardsSpeed = 4f;
+        private float runSpeed = 5f;
+        private float runBackwardsSpeed = 3f;
 
         public override void EnterState(MovementStateManager movementStateManager)
         {
@@ -18,7 +19,7 @@ namespace Moonshine.Player.MovementState.States
         {
             if (movementStateManager.IsInMovement())
             {
-                if (GameInput.Instanse.IsRunReleased())
+                if (!GameInput.Instanse.IsRunPressed())
                 {
                     ExitState(movementStateManager, movementStateManager.WalkingState);
                 }
@@ -29,7 +30,9 @@ namespace Moonshine.Player.MovementState.States
             }
 
             var movementInput = movementStateManager.GetMovementInput();
-            if (movementInput.y > 0)
+
+            // If player goes forwad or aside.
+            if (movementInput.y > 0 || Mathf.Abs(movementInput.y) < Mathf.Epsilon)
             {
                 movementStateManager.SetMoveSpeed(runSpeed);
             }
