@@ -6,7 +6,6 @@ using UnityEditor.Experimental.GraphView;
 
 public abstract class Gun : MonoBehaviour
 {
-    
     [SerializeField] protected float bulletSpeed;
     [SerializeField] protected bool IsReloading;
     [SerializeField] protected int currentAmmo; // current amount bullets in the gun
@@ -17,10 +16,19 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected Transform gunPointer;
     [SerializeField] protected Rigidbody bulletPrefab;
     [SerializeField] protected float delay;
-        protected float currentDelay;
-        protected int reason; // difference between full magazine and some bullets we shooted
-        protected bool isReloading = false;
-        protected int residue; //difference between full magazine and some bullets we shooted
+    protected float currentDelay;
+    protected int reason; // difference between full magazine and some bullets we shooted
+    protected bool isReloading = false;
+    protected int residue; //difference between full magazine and some bullets we shooted
+    public Animator animator;
+    public bool isShooting = false;
+        
+
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
 
 
@@ -39,6 +47,7 @@ public abstract class Gun : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && currentAmmo>0)
         {
             Shoot();
+            animator.SetBool("shooting", true);
             Debug.Log(currentAmmo);
             
         }
@@ -61,6 +70,7 @@ public abstract class Gun : MonoBehaviour
         bulletInstance.velocity = gunPointer.forward * bulletSpeed;
         currentDelay = delay;
         currentAmmo--;
+        
        
     }
 
