@@ -21,7 +21,7 @@ public abstract class Gun : MonoBehaviour
     protected bool isReloading = false;
     protected int residue; //difference between full magazine and some bullets we shooted
     public Animator animator;
-    public bool isShooting = false;
+    protected bool isShooting = false;
         
 
 
@@ -34,6 +34,7 @@ public abstract class Gun : MonoBehaviour
 
     private void Update()
     {
+       
         if (isReloading)
         {
             return;
@@ -45,18 +46,16 @@ public abstract class Gun : MonoBehaviour
             return;
         }
         if (Input.GetMouseButtonDown(0) && currentAmmo>0)
-        {
-            Shoot();
-            animator.SetBool("shooting", true);
-            Debug.Log(currentAmmo);
-            
+        {           
+            Shoot();        
+            Debug.Log(currentAmmo);            
         }
         else
-        {
+        { 
             currentDelay -= Time.deltaTime;
         }
-
         
+
 
     }
    

@@ -13,6 +13,7 @@ namespace Moonshine.Player.MovementState
         [SerializeField] private CharacterController characterController;
         [SerializeField] private float gravity = -9.8f;
         [SerializeField] private Animator animator;
+        
 
         private float moveSpeed = 3f;
 
@@ -55,6 +56,11 @@ namespace Moonshine.Player.MovementState
             currentMovementState.UpdateState(this);
 
             HandleAnimations();
+
+            
+
+
+           
         }
 
         private void HandleAnimations()
