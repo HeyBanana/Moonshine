@@ -17,21 +17,9 @@ namespace Moonshine.Player.MovementState.States
 
         public override void UpdateState(MovementStateManager movementStateManager)
         {
-            if (movementStateManager.IsInMovement())
-            {
-                if (GameInput.Instanse.IsRunPressed())
-                {
-                    ExitState(movementStateManager, movementStateManager.RunningState);
-                }
-            }
-            else
-            {
-                ExitState(movementStateManager, movementStateManager.IdleState);
-            }
-
             var movementInput = movementStateManager.GetMovementInput();
 
-            // If player goes forwad or aside.
+            // If player goes forward or aside.
             if (movementInput.y > 0 || Mathf.Abs(movementInput.y) < Mathf.Epsilon)
             {
                 movementStateManager.SetMoveSpeed(walkSpeed);
@@ -39,6 +27,25 @@ namespace Moonshine.Player.MovementState.States
             else
             {
                 movementStateManager.SetMoveSpeed(walkBackwardsSpeed);
+            }
+
+            if (movementStateManager.IsInMovement())
+            {
+                if (GameInput.Instanse.IsRunPressed())
+                {
+                    ExitState(movementStateManager, movementStateManager.RunningState);
+                    return;
+                }
+
+                if (GameInput.Instanse.IsJumping())
+                {
+                    ExitState(movementStateManager, movementStateManager.JumpState);
+                    return;
+                }
+            }
+            else
+            {
+                ExitState(movementStateManager, movementStateManager.IdleState);
             }
         }
 
