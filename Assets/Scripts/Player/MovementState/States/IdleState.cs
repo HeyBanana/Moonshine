@@ -13,11 +13,18 @@ namespace Moonshine.Player.MovementState.States
                 if (GameInput.Instanse.IsRunPressed())
                 {
                     movementStateManager.SwitchState(movementStateManager.RunningState);
+                    return;
                 }
                 else
                 {
                     movementStateManager.SwitchState(movementStateManager.WalkingState);
+                    return;
                 }
+            }
+
+            if(GameInput.Instanse.IsJumping())
+            {
+                movementStateManager.SwitchState(movementStateManager.JumpState);
             }
         }
     }
