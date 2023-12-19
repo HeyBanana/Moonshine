@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Context 
+public class Context
 {
     public static Context _instance;
+    public const string GameLaunchModKey = "GameLaunch";
 
     public static Context Instance => _instance ??= new Context();
 
     public ISaveSystem SaveSystem { get; private set; }
 
    // public IAppSystem AppSystem { get; private set; } 
-
 
 
     private Context()
@@ -25,4 +25,6 @@ public class Context
     {
         SaveSystem = new SaveSystem();
     }
+
+
 }

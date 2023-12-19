@@ -1,31 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+
 public class PlayerEntity : BaseEntity, ISerializebleEntity
 {
-    // ToDo: Player specific logic will be here 
-    public EntitySaveData GetSaveData(PlayerEntity playerEntity)
-    {
-        var saveData = new EntitySaveData();
+    [SerializeField] CharacterController characterController;
 
-        saveData.CurentPosition = WorldPosition;
-        
-        return saveData;
+    // ToDo: Player specific logic will be here 
+
+    public EntitySaveData GetSaveData()
+    {
+        //Helth, Ammo,Weapon etc
+        var savedata = new EntitySaveData();
+        savedata.CurentPosition = WorldPosition;
+        return savedata;
     }
 
     public string GetSaveKey()
     {
-       
+
         return "Player";
     }
 
+    
     public void InitFromSaveData(EntitySaveData entitySaveData)
-    
     {
-        transform.position = entitySaveData.CurentPosition;    
+        //Weapon, Health ect
+        characterController.enabled = false;  
+        transform.position = entitySaveData.CurentPosition;
+        characterController.enabled = true;
+        
     }
+
     
-       
 }

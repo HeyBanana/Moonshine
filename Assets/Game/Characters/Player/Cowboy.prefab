@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1666654711828579269}
   - component: {fileID: 2286682378862843856}
   - component: {fileID: 6006508127563091053}
+  - component: {fileID: 8699015836710201065}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -92,6 +93,18 @@ CharacterController:
   m_SkinWidth: 0.06
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!114 &8699015836710201065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336318233219152447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56da343d62c658b4b9812779445d6ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6553191142731816413
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +213,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3062642915599599086, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -3062642915599599086, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7,
         type: 3}

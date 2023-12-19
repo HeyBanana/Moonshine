@@ -6,6 +6,7 @@ public interface ISaveSystem
     void Save<T>(string key, T saveObject);
     
     T Load<T>(string key);
+
 }
 
 public class SaveSystem : ISaveSystem
