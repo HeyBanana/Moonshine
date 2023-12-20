@@ -28,6 +28,6 @@ namespace Moonshine.Core
 
         public bool IsJumping() => playerInputActions.Player.Jump.IsPressed();
 
-        public bool IsPausePressed() => playerInputActions.Player.Pause.IsPressed();
+        public bool IsPausePressed() => playerInputActions.Player.Pause.WasPressedThisFrame();
     }
 }
