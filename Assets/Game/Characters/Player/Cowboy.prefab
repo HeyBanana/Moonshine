@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1666654711828579269}
   - component: {fileID: 2286682378862843856}
   - component: {fileID: 6006508127563091053}
+  - component: {fileID: 3599595848929094350}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -64,8 +65,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameInput: {fileID: 0}
   characterController: {fileID: 6006508127563091053}
-  gravity: -9.8
-  animator: {fileID: 5204229691368014668}
+  animator: {fileID: 3599595848929094350}
+  gravity: -14
+  jumpHeight: 1.5
+  animationTransitionSpeed: 10
 --- !u!143 &6006508127563091053
 CharacterController:
   m_ObjectHideFlags: 0
@@ -86,12 +89,33 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.1
   m_SkinWidth: 0.06
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!95 &3599595848929094350
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336318233219152447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
+  m_Controller: {fileID: 9100000, guid: f4dcec8f97d34964fadecc6a76282e07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6553191142731816413
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +240,8 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
     m_RemovedGameObjects:
     - {fileID: -2572967989333021709, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
     - {fileID: 2654713335656134247, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
@@ -226,12 +251,6 @@ PrefabInstance:
 --- !u!4 &2222824934704798006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1825003472702455517}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5204229691368014668 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7,
     type: 3}
   m_PrefabInstance: {fileID: 1825003472702455517}
   m_PrefabAsset: {fileID: 0}
