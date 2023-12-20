@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 2833506302988438131}
   - component: {fileID: 1377123563612619875}
   - component: {fileID: 4633108464594357060}
+  - component: {fileID: 8408196612525679773}
   m_Layer: 0
   m_Name: Cowboy_TestEnemy
   m_TagString: Untagged
@@ -469,8 +470,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameInput: {fileID: 0}
   characterController: {fileID: 1377123563612619875}
+  animator: {fileID: 8408196612525679773}
   gravity: -9.8
-  animator: {fileID: 8071904190050736196}
+  jumpHeight: 5
+  animationTransitionSpeed: 10
 --- !u!143 &1377123563612619875
 CharacterController:
   m_ObjectHideFlags: 0
@@ -491,7 +494,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.1
   m_SkinWidth: 0.06
@@ -510,6 +513,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPoints: 100
+--- !u!95 &8408196612525679773
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993678673963252512}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
+  m_Controller: {fileID: 9100000, guid: f4dcec8f97d34964fadecc6a76282e07, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1029906707547457739
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +915,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9218902509118856690}
-  - component: {fileID: 8071904190050736196}
   m_Layer: 0
   m_Name: CowboyUI
   m_TagString: Untagged
@@ -927,27 +950,6 @@ Transform:
   - {fileID: 194473434677194500}
   m_Father: {fileID: 6068562723250669097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8071904190050736196
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800359956436598082}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 833bc9b6b4fefcd48940b2a9bfe1dcf7, type: 3}
-  m_Controller: {fileID: 9100000, guid: f4dcec8f97d34964fadecc6a76282e07, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1810863221545086668
 GameObject:
   m_ObjectHideFlags: 0
