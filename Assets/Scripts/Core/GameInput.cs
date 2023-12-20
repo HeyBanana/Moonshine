@@ -27,5 +27,7 @@ namespace Moonshine.Core
         public bool IsRunPressed() => playerInputActions.Player.Run.IsPressed();
 
         public bool IsJumping() => playerInputActions.Player.Jump.IsPressed();
+
+        public bool IsPausePressed() => playerInputActions.Player.Pause.IsPressed();
     }
 }

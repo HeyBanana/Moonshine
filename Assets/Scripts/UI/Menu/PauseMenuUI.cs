@@ -1,14 +1,15 @@
+using Moonshine.Core;
 using UnityEngine;
 
 public class PauseMenuUI : MonoBehaviour
 {
-    public static bool GameIsPause = false;
+    private static bool GameIsPause = false;
 
     public GameObject pauseMenuUI;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameInput.Instanse.IsPausePressed())
         {
             if (GameIsPause)
             {
