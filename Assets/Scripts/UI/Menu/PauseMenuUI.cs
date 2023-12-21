@@ -5,7 +5,8 @@ public class PauseMenuUI : MonoBehaviour
 {
     private static bool GameIsPause = false;
 
-    public GameObject pauseMenuUI;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private EntitySaver entitySaver;
 
     private void Update()
     {
@@ -20,6 +21,18 @@ public class PauseMenuUI : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    public void Save()
+    {
+        entitySaver.SaveAllEntity();
+    }
+
+    public void Load()
+    {
+        Resume();
+
+        Loader.Load(Loader.Scene.FirstLevel, Loader.LaunchMode.Load);
     }
 
     public void Resume()
@@ -38,9 +51,10 @@ public class PauseMenuUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void LoadMenu()
+    public void LoadMainMenu()
     {
-        Debug.Log("Loading menu....");
+        Time.timeScale = 1f;
+        Loader.Load(Loader.Scene.StartMenu);
     }
 
     public void QuitGame()
