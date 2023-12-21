@@ -1,40 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntitySaver : MonoBehaviour
 {
     private ISaveSystem saveSystem;
 
+    [SerializeField] private List<Transform> entitiesToSave;
+
     private void Awake()
     {
         saveSystem = new SaveSystem();
+    }
 
+    private void Start()
+    {
         if (PlayerPrefs.GetInt(Context.GameLaunchModKey, 0) == 1)
-         { 
+        {
             LoadAllEntity();
         }
     }
 
     public void SaveAllEntity()
     {
-       var entities = GetComponentsInChildren<ISerializebleEntity>();
-       
-        foreach (var entity in entities) 
+        foreach (var entity in entitiesToSave) 
         {
-            saveSystem.Save(entity.GetSaveKey(), entity.GetSaveData());
+            var serializableEntity = entity.GetComponent<ISerializebleEntity>();
+            saveSystem.Save(serializableEntity.GetSaveKey(), serializableEntity.GetSaveData());
         }
     }
 
     public void LoadAllEntity()
     {
-        var entitys = GetComponentsInChildren<ISerializebleEntity>();
-
-        foreach (var entity in entitys)
+        foreach (var entity in entitiesToSave)
         {
-            var loadData = saveSystem.Load<EntitySaveData>(entity.GetSaveKey());
+            var serializableEntity = entity.GetComponent<ISerializebleEntity>();
+
+            var loadData = saveSystem.Load<EntitySaveData>(serializableEntity.GetSaveKey());
 
             if (loadData != null)
             {
-                entity.InitFromSaveData(loadData);
+                serializableEntity.InitFromSaveData(loadData);
             }
         }
     }    

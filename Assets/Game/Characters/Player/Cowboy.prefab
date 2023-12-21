@@ -96,18 +96,6 @@ CharacterController:
   m_SkinWidth: 0.06
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &8699015836710201065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2336318233219152447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56da343d62c658b4b9812779445d6ee5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &5783475859508210832
 Animator:
   serializedVersion: 5
@@ -129,6 +117,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8699015836710201065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336318233219152447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56da343d62c658b4b9812779445d6ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 6006508127563091053}
 --- !u!1 &6553191142731816413
 GameObject:
   m_ObjectHideFlags: 0
