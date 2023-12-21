@@ -11,23 +11,18 @@ namespace Moonshine.Player.MovementState
 
         [SerializeField] private GameInput gameInput;
         [SerializeField] private CharacterController characterController;
-        [SerializeField] private float gravity = -9.8f;
         [SerializeField] private Animator animator;
 
+        [SerializeField] private float gravity = -9.8f;
+        [SerializeField] private float jumpHeight = 5f;
+
+        [SerializeField] private float animationTransitionSpeed = 10f;
+
         private float moveSpeed = 3f;
-
-        public void SetMoveSpeed(float value)
-        {
-            moveSpeed = value;
-        }
-
-        public Animator GetAnimator() => animator;
+        private float movementY;
 
         // Vector2 that received from keyboard.
         private Vector2 inputVector;
-
-        public Vector2 GetMovementInput() => inputVector;
-
         private Vector3 movementVector;
 
         private MovementBaseState currentMovementState;
@@ -35,10 +30,30 @@ namespace Moonshine.Player.MovementState
         public IdleState IdleState = new IdleState();
         public WalkingState WalkingState = new WalkingState();
         public RunningState RunningState = new RunningState();
+        public JumpState JumpState = new JumpState();
+
+        public Vector3 GetMovementVector() => movementVector;
+        public Vector2 GetMovementInput() => inputVector;
+        public Animator GetAnimator() => animator;
+        public float GetGravity() => gravity;
+        public float GetJumpHeight() => jumpHeight;
+        public float GetGroundedGravity() => -0.5f;
+
+        public void SetMoveSpeed(float value)
+        {
+            moveSpeed = value;
+        }
+
+        public void SetMovementY(float value)
+        {
+            movementY = value;
+        }
 
         private void Start()
         {
             SwitchState(IdleState);
+
+            movementY = GetGroundedGravity();
         }
 
         private void FixedUpdate()
@@ -47,20 +62,26 @@ namespace Moonshine.Player.MovementState
 
             var moveDirection = transform.forward * inputVector.y + transform.right * inputVector.x;
 
+            currentMovementState.UpdateState(this);
+
             movementVector = moveDirection.normalized * moveSpeed * Time.fixedDeltaTime;
-            movementVector.y = GetGravityValue();
+            movementVector.y = movementY;
 
             characterController.Move(movementVector);
-
-            currentMovementState.UpdateState(this);
 
             HandleAnimations();
         }
 
         private void HandleAnimations()
         {
-            animator.SetFloat(HorizontalMovementAnimationParameter, inputVector.x);
-            animator.SetFloat(VerticalMovementAnimationParameter, inputVector.y);
+            var currentHorizontalValue = animator.GetFloat(HorizontalMovementAnimationParameter);
+            var currentVerticalValue = animator.GetFloat(VerticalMovementAnimationParameter);
+
+            var horizontalValue = Mathf.Lerp(currentHorizontalValue, inputVector.x, Time.fixedDeltaTime * animationTransitionSpeed);
+            var verticalValue = Mathf.Lerp(currentVerticalValue, inputVector.y, Time.fixedDeltaTime * animationTransitionSpeed);
+
+            animator.SetFloat(HorizontalMovementAnimationParameter, horizontalValue);
+            animator.SetFloat(VerticalMovementAnimationParameter, verticalValue);
         }
 
         public void SwitchState(MovementBaseState state)
@@ -69,14 +90,37 @@ namespace Moonshine.Player.MovementState
             currentMovementState.EnterState(this);
         }
 
-        private float GetGravityValue()
-        {
-            return characterController.isGrounded ? 0f : gravity;
-        }
-
         public bool IsInMovement()
         {
             return inputVector != Vector2.zero;
         }
+
+        public bool IsGrounded()
+        {
+            return characterController.isGrounded;
+        }
+
+        #region Animation Events
+
+        public bool AnimationJumpStarted { get; private set; }
+        public bool JustLanded { get; private set; }
+
+        public void StartAnimatedJump()
+        {
+            AnimationJumpStarted = true;
+        }
+
+        public void SetLandedState()
+        {
+            JustLanded = true;
+        }
+
+        public void ResetAnimationEventsState()
+        {
+            AnimationJumpStarted = false;
+            JustLanded = false;
+        }
+
+        #endregion
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Moonshine.Core
@@ -23,8 +24,10 @@ namespace Moonshine.Core
             return inputVector;
         }
 
-        public bool IsRunPressed() => playerInputActions.Player.Run.IsInProgress();
+        public bool IsRunPressed() => playerInputActions.Player.Run.IsPressed();
 
-        public bool IsRunReleased() => playerInputActions.Player.Run.IsInProgress() == false;
+        public bool IsJumping() => playerInputActions.Player.Jump.IsPressed();
+
+        public bool IsPausePressed() => playerInputActions.Player.Pause.WasPressedThisFrame();
     }
 }
