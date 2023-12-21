@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 8408196612525679773}
   m_Layer: 0
   m_Name: Cowboy_TestEnemy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14013,7 +14013,8 @@ MonoBehaviour:
   range: 100
   damage: 25
   muzzleFlash: {fileID: 6968972635422649372}
-  hitEffect: {fileID: 157586, guid: 623c0cc839d4cdf478395002ec2e557e, type: 3}
+  hitEffectWall: {fileID: 157586, guid: 623c0cc839d4cdf478395002ec2e557e, type: 3}
+  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
 --- !u!1 &8605961884451199143
 GameObject:
   m_ObjectHideFlags: 0

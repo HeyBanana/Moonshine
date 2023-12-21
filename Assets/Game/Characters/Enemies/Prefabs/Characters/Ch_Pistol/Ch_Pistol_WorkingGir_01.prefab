@@ -485,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898642492538545371}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.3505587, z: -0, w: 0.9365408}
+  m_LocalRotation: {x: 0, y: -0.35055876, z: 0, w: 0.9365408}
   m_LocalPosition: {x: 6.24, y: -0.12897491, z: -6.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b92cb08236d344683b47a1403b1561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targer: {fileID: 0}
+  target: {fileID: 0}
   damage: 20
 --- !u!1 &1968558189803212929
 GameObject:
@@ -2383,8 +2383,9 @@ MonoBehaviour:
   damage: 25
   muzzleFlash: {fileID: 6055259023475719121, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
-  hitEffect: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
+  hitEffectWall: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
+  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
   enemyAttack: {fileID: 1915116343175908894}
 --- !u!1 &7808850885104194535
 GameObject:

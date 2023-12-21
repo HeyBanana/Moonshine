@@ -279,8 +279,9 @@ MonoBehaviour:
   damage: 25
   muzzleFlash: {fileID: 6055259023475719121, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
-  hitEffect: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
+  hitEffectWall: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
+  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
   enemyAttack: {fileID: 5582389962045046395}
 --- !u!1 &577523108169117678
 GameObject:
@@ -1647,7 +1648,7 @@ Animator:
   m_GameObject: {fileID: 4799998017415558404}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4837235d67e136e4b883adb2bafc73e8, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7919c7607aeb7344db3f125f4289015c, type: 2}
+  m_Controller: {fileID: 22100000, guid: 839a4b0933a149844ab90b0958fa46d9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1745,7 +1746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b92cb08236d344683b47a1403b1561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targer: {fileID: 0}
+  target: {fileID: 0}
   damage: 20
 --- !u!1 &4849588645220535414
 GameObject:

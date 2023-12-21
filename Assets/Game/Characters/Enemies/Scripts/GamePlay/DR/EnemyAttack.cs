@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] Transform targer;
+    [SerializeField] Transform target;
     [SerializeField] int damage = 20;
 
     public event Action OnShoot;
@@ -23,7 +23,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void AttackHitEvent()
     {
-        if (targer == null) return;
+        if (target == null) return;
         OnShoot?.Invoke();
         Debug.Log("bang bang");
     }

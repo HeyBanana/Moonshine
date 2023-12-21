@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b92cb08236d344683b47a1403b1561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targer: {fileID: 0}
+  target: {fileID: 0}
   damage: 20
 --- !u!1 &2942859791498322785
 GameObject:
@@ -1015,8 +1015,9 @@ MonoBehaviour:
   damage: 25
   muzzleFlash: {fileID: 6055259023475719121, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
-  hitEffect: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
+  hitEffectWall: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
     type: 3}
+  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
   enemyAttack: {fileID: 2798208246237995316}
 --- !u!1 &3626334575386523660
 GameObject:

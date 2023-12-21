@@ -10,7 +10,8 @@ public class WeaponEnemy : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] int damage = 25;
     [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitEffect;
+    [SerializeField] GameObject hitEffectWall;
+    [SerializeField] GameObject hitEffectBlood;
     [SerializeField] EnemyAttack enemyAttack;
 
 
@@ -65,7 +66,16 @@ public class WeaponEnemy : MonoBehaviour
 
     private void CreateHitImpact(RaycastHit hit)
     {
-        GameObject impatc = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(impatc, 1);
+        if (hit.transform.tag == "Player")
+        {
+            GameObject impatc = Instantiate(hitEffectBlood, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impatc, 1);
+
+        }
+        else
+        {
+            GameObject impatc = Instantiate(hitEffectWall, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impatc, 1);
+        }
     }
 }
