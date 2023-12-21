@@ -6,8 +6,11 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
    public static  bool GameIsPause = false;
+   public AudioClip PauseMusicClip = null;
+   public GameObject GameMusicManager = null;
 
     public GameObject pauseMenuUI;
+
 
 
     // Update is called once per frame
@@ -17,11 +20,14 @@ public class PauseMenu : MonoBehaviour
         {
             if (GameIsPause)
             {
+                
                 Resume();
             }
             else
             {
+                
                 Pause();
+
             }
         }
         
