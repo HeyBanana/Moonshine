@@ -12,11 +12,17 @@ namespace Moonshine.Player.MovementState
         [SerializeField] private GameInput gameInput;
         [SerializeField] private CharacterController characterController;
         [SerializeField] private Animator animator;
+        [SerializeField] private SoundManager soundManager;
 
         [SerializeField] private float gravity = -9.8f;
         [SerializeField] private float jumpHeight = 5f;
 
         [SerializeField] private float animationTransitionSpeed = 10f;
+
+        public float walkSpeed = 2.5f;
+        public float walkBackwardsSpeed = 1.5f;
+        public float runSpeed = 5f;
+        public float runBackwardsSpeed = 3f;
 
         private float moveSpeed = 3f;
         private float movementY;
@@ -36,8 +42,10 @@ namespace Moonshine.Player.MovementState
         public Vector2 GetMovementInput() => inputVector;
         public Animator GetAnimator() => animator;
         public float GetGravity() => gravity;
+        public SoundManager GetSoundManager() => soundManager;
         public float GetJumpHeight() => jumpHeight;
         public float GetGroundedGravity() => -0.5f;
+        public float GetMoveSpeed() => moveSpeed;
 
         public void SetMoveSpeed(float value)
         {
@@ -99,6 +107,10 @@ namespace Moonshine.Player.MovementState
         {
             return characterController.isGrounded;
         }
+
+        public bool IsWalking() => currentMovementState is WalkingState;
+
+        public bool IsRunning() => currentMovementState is RunningState;
 
         #region Animation Events
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6006508127563091053}
   - component: {fileID: 5783475859508210832}
   - component: {fileID: 8699015836710201065}
+  - component: {fileID: 6426468716656158452}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -67,9 +68,14 @@ MonoBehaviour:
   gameInput: {fileID: 0}
   characterController: {fileID: 6006508127563091053}
   animator: {fileID: 5783475859508210832}
+  soundManager: {fileID: 0}
   gravity: -14
   jumpHeight: 1.5
   animationTransitionSpeed: 10
+  walkSpeed: 2.5
+  walkBackwardsSpeed: 1.5
+  runSpeed: 5
+  runBackwardsSpeed: 3
 --- !u!143 &6006508127563091053
 CharacterController:
   m_ObjectHideFlags: 0
@@ -130,6 +136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 6006508127563091053}
+--- !u!114 &6426468716656158452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336318233219152447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014896242c7cdc547b6b276e25e4ce20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementStateManager: {fileID: 2286682378862843856}
 --- !u!1 &6553191142731816413
 GameObject:
   m_ObjectHideFlags: 0
