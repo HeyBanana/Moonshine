@@ -7,9 +7,6 @@ namespace Moonshine.Player.MovementState.States
     {
         private const string RunAnimationParameter = "running";
 
-        private float runSpeed = 5f;
-        private float runBackwardsSpeed = 3f;
-
         public override void EnterState(MovementStateManager movementStateManager)
         {
             movementStateManager.GetAnimator().SetBool(RunAnimationParameter, true);
@@ -22,11 +19,11 @@ namespace Moonshine.Player.MovementState.States
             // If player goes forward or aside.
             if (movementInput.y > 0 || Mathf.Abs(movementInput.y) < Mathf.Epsilon)
             {
-                movementStateManager.SetMoveSpeed(runSpeed);
+                movementStateManager.SetMoveSpeed(movementStateManager.runSpeed);
             }
             else
             {
-                movementStateManager.SetMoveSpeed(runBackwardsSpeed);
+                movementStateManager.SetMoveSpeed(movementStateManager.runBackwardsSpeed);
             }
 
             if (movementStateManager.IsInMovement())
