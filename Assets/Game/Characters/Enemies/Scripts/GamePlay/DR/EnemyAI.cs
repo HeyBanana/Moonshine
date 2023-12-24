@@ -7,9 +7,9 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float chaseRange = 10f;
+    [SerializeField] float chaseRange = 6f;
 
-    [SerializeField] WeaponEnemy _weaponEnemy;
+    //[SerializeField] WeaponEnemy _weaponEnemy;
     [SerializeField] Health _heatlth;
 
 
@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        _weaponEnemy = GetComponent<WeaponEnemy>();
+        //_weaponEnemy = GetComponent<WeaponEnemy>();
         _heatlth.OnReaction += Reaction;
     }
 
