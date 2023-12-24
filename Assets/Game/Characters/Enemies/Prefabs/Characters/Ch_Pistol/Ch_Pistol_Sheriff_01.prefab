@@ -1263,7 +1263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   chaseRange: 6
-  _weaponEnemy: {fileID: 2469761543374482847}
   _heatlth: {fileID: 6584082313946563190}
 --- !u!114 &6584082313946563190
 MonoBehaviour:
@@ -2422,11 +2421,9 @@ MonoBehaviour:
   revolverEnemy: {fileID: 7835391327542586757}
   range: 100
   damage: 25
-  muzzleFlash: {fileID: 6055259023475719121, guid: 90fbee15dd1fbf948981b1b448f2fecb,
-    type: 3}
-  hitEffectWall: {fileID: 6055259023455989831, guid: 90fbee15dd1fbf948981b1b448f2fecb,
-    type: 3}
-  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
+  muzzleFlash: {fileID: 7727881629504617463}
+  hitEffectWall: {fileID: 7727881629520015457}
+  hitEffectBlood: {fileID: 166404, guid: 354689d571a41b641be6c2092ce7c9ee, type: 3}
   enemyAttack: {fileID: 3731394269422443726}
 --- !u!1 &7999732992882902054
 GameObject:
@@ -2911,6 +2908,18 @@ PrefabInstance:
 --- !u!4 &222306924629666073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4879888146567566, guid: 7b97806aed4ca004094870cf29e1c4f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 217471043993614487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7727881629504617463 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7510438090684466016, guid: 7b97806aed4ca004094870cf29e1c4f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 217471043993614487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7727881629520015457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7510438090702489846, guid: 7b97806aed4ca004094870cf29e1c4f1,
     type: 3}
   m_PrefabInstance: {fileID: 217471043993614487}
   m_PrefabAsset: {fileID: 0}
