@@ -11,25 +11,36 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] public int currentAmmo; // current amount bullets in the gun
     [SerializeField] public int maxAmmo; // 
     [SerializeField] public int magazine;
-    [SerializeField] protected float damage;
+    [SerializeField] protected int damage = 25;
     [SerializeField] protected float reloadTime;
     [SerializeField] protected Transform gunPointer;
     [SerializeField] protected Rigidbody bulletPrefab;
     [SerializeField] protected float delay;
+    
     protected float currentDelay;
     protected int reason; // difference between full magazine and some bullets we shooted
     protected bool isReloading = false;
     protected int residue; //difference between full magazine and some bullets we shooted
     public Animator animator;
     protected bool isShooting = false;
-    
+
+    [SerializeField] float range = 100f;
+    [SerializeField] ParticleSystem muzzleFlash;
+    [SerializeField] GameObject hitEffectWall;
+    [SerializeField] GameObject hitEffectBlood;
+
+    [SerializeField] private AudioClip[] fxSound;
+    AudioSource shootPlayer;
+
 
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        
+        shootPlayer = GetComponent<AudioSource>();
+
+
 
     }
     private void Update()
@@ -42,6 +53,8 @@ public abstract class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && maxAmmo > 0)
         {
             StartCoroutine(Reload());
+            shootPlayer.PlayOneShot(fxSound[1],2);
+            shootPlayer.PlayOneShot(fxSound[2]);
             Debug.Log($"maxAmmo {maxAmmo}");
             return;
         }
@@ -64,10 +77,20 @@ public abstract class Gun : MonoBehaviour
         if (currentDelay > 0)
             return;
 
-        Rigidbody bulletInstance = Instantiate(bulletPrefab, gunPointer.position, gunPointer.rotation);
-        bulletInstance.velocity = gunPointer.forward * bulletSpeed;
+        //Rigidbody bulletInstance = Instantiate(bulletPrefab, gunPointer.position, gunPointer.rotation);
+        //bulletInstance.velocity = gunPointer.forward * bulletSpeed;
+
+        PlayMuzzleFlash();
+        ProcessRaycast();
+        shootPlayer.PlayOneShot(fxSound[0]);
+
         currentDelay = delay;
         currentAmmo--;
+    }
+
+    private void PlayMuzzleFlash()
+    {
+        muzzleFlash.Play();
     }
 
     public IEnumerator Reload()
@@ -81,6 +104,40 @@ public abstract class Gun : MonoBehaviour
         currentAmmo = magazine;   
         isReloading = false;
         
+    }
+
+    private void ProcessRaycast()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(gunPointer.transform.position, gunPointer.transform.forward, out hit, range))
+        {
+            CreateHitImpact(hit);
+            Health target = hit.transform.GetComponent<Health>();
+            if (target == null) { return; }
+            target.Damage(damage);
+
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    private void CreateHitImpact(RaycastHit hit)
+    {
+        if (hit.transform.tag == "Enemy")
+        {
+            GameObject impatc = Instantiate(hitEffectBlood, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impatc, 1);
+
+        }
+        else
+        {
+            GameObject impatc = Instantiate(hitEffectWall, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impatc, 1);
+        }
+
     }
 
 

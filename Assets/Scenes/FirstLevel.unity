@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -46477,6 +46477,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5486159021521834049, guid: 477a2b8f23626ed4f89880835e07e1f7,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c7c1f8f1e1c7fb4f94649a51f406d9b, type: 3}
     - target: {fileID: 6410711086594224617, guid: 477a2b8f23626ed4f89880835e07e1f7,
         type: 3}
       propertyPath: m_Controller
@@ -83261,6 +83266,7 @@ GameObject:
   - component: {fileID: 2112998262260240006}
   - component: {fileID: 2112869316973130332}
   - component: {fileID: 2154006559370411023}
+  - component: {fileID: 2154006559370411024}
   m_Layer: 0
   m_Name: SM_Wep_Revolver_02
   m_TagString: Untagged
@@ -83491,13 +83497,117 @@ MonoBehaviour:
   currentAmmo: 5
   maxAmmo: 30
   magazine: 5
-  damage: 1
+  damage: 25
   reloadTime: 3
   gunPointer: {fileID: 6103504795786850680}
   bulletPrefab: {fileID: 2390117949808333237, guid: 203d8701a53d26540b2e44405ab7399f,
     type: 3}
   delay: 0.3
   animator: {fileID: 459763456}
+  range: 100
+  muzzleFlash: {fileID: 19885060, guid: 623c0cc839d4cdf478395002ec2e557e, type: 3}
+  hitEffectWall: {fileID: 157586, guid: 623c0cc839d4cdf478395002ec2e557e, type: 3}
+  hitEffectBlood: {fileID: 166404, guid: 2b3d01e3e4d9105409696d37a33d2a7e, type: 3}
+  fxSound:
+  - {fileID: 8300000, guid: 518bb222e3a06ac4b9a596fdfed52965, type: 3}
+  - {fileID: 8300000, guid: e2a49102980bc114499c9bfdddcd000a, type: 3}
+  - {fileID: 8300000, guid: 3e6c701920f5d0740be3218259b8e150, type: 3}
+--- !u!82 &2154006559370411024
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141362192198671538}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!23 &2154128023634575122
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -83972,7 +84082,7 @@ Transform:
   m_GameObject: {fileID: 8391145074279629044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 141.7, z: 28.3}
+  m_LocalPosition: {x: 0, y: 96.4, z: 28.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
