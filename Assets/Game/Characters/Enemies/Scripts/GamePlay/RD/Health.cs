@@ -6,6 +6,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int _maxHealth = 100;
+    [SerializeField] int _score = 100;
+
     [SerializeField] float timeToDestroy = 10f;
     Animator animator;
 
@@ -13,6 +15,7 @@ public class Health : MonoBehaviour
 
     public event Action<int, int> OnDamaged;
     public event Action OnReaction;
+    public event Action OnDieBecome;
     public event Action<int> OnScoreChanged;
 
     //public GameBehavior gameBehavior;
@@ -32,11 +35,15 @@ public class Health : MonoBehaviour
         CurrentHeath -= damage;
 
         OnDamaged?.Invoke(CurrentHeath, _maxHealth);
-        OnReaction?.Invoke();
 
         if (CurrentHeath <= 0)
         {
             OnDie();
+        }
+        else
+        {
+            OnReaction?.Invoke(); 
+
         }
 
     }
@@ -51,9 +58,10 @@ public class Health : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("die");
+            //animator.SetTrigger("onDie");
+            OnDieBecome?.Invoke();
+            OnScoreChanged?.Invoke(_score);
             Destroy(gameObject, timeToDestroy);
-            OnScoreChanged?.Invoke(100);
         }
     }
 }

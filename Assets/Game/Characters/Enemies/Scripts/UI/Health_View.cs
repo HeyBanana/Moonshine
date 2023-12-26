@@ -11,7 +11,7 @@ public class Health_View : MonoBehaviour
     [SerializeField] TextMeshProUGUI _healthCount;
     private void Start()
     {
-       // _heatlth = gameObject.GetComponent<Health>();
+       // heatlth = gameObject.GetComponent<Health>();
         _healthCount.text = _heatlth.CurrentHeath.ToString();
         _heatlth.OnDamaged += OnHealthChanged;
     }

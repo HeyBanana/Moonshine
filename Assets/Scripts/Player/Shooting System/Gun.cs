@@ -30,7 +30,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] GameObject hitEffectBlood;
 
     [SerializeField] private AudioClip[] fxSound;
-    AudioSource shootPlayer;
+    AudioSource audioSourcePlayer;
 
 
 
@@ -38,7 +38,7 @@ public abstract class Gun : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        shootPlayer = GetComponent<AudioSource>();
+        audioSourcePlayer = GetComponent<AudioSource>();
 
 
 
@@ -53,8 +53,9 @@ public abstract class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && maxAmmo > 0)
         {
             StartCoroutine(Reload());
-            shootPlayer.PlayOneShot(fxSound[1],2);
-            shootPlayer.PlayOneShot(fxSound[2]);
+            audioSourcePlayer.PlayOneShot(fxSound[1]);
+            audioSourcePlayer.PlayOneShot(fxSound[2]);
+            audioSourcePlayer.PlayOneShot(fxSound[3]);
             Debug.Log($"maxAmmo {maxAmmo}");
             return;
         }
@@ -82,7 +83,7 @@ public abstract class Gun : MonoBehaviour
 
         PlayMuzzleFlash();
         ProcessRaycast();
-        shootPlayer.PlayOneShot(fxSound[0]);
+        audioSourcePlayer.PlayOneShot(fxSound[0]);
 
         currentDelay = delay;
         currentAmmo--;

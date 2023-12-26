@@ -8,11 +8,16 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] int damage = 20;
 
+    AudioSource audioSourceEnemy;
+    EnemyAI enemyAI;
+
     public event Action OnShoot;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        audioSourceEnemy = GetComponent<AudioSource>();
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     // Update is called once per frame
@@ -25,6 +30,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (target == null) return;
         OnShoot?.Invoke();
+        audioSourceEnemy.PlayOneShot(enemyAI.FxSound[0]);
         Debug.Log("bang bang");
     }
 }

@@ -9,8 +9,12 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] float chaseRange = 6f;
 
-    //[SerializeField] WeaponEnemy _weaponEnemy;
-    [SerializeField] Health _heatlth;
+    [SerializeField] private AudioClip[] fxSound;
+    AudioSource audioSourceEnemy;
+
+    [SerializeField] Health heatlth;
+
+    public AudioClip[] FxSound { get { return fxSound; } }
 
 
     NavMeshAgent navMeshAgent;
@@ -21,8 +25,11 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        //_weaponEnemy = GetComponent<WeaponEnemy>();
-        _heatlth.OnReaction += Reaction;
+        audioSourceEnemy = GetComponent<AudioSource>();
+        heatlth = GetComponent<Health>();
+
+        heatlth.OnReaction += Reaction;
+        heatlth.OnDieBecome += OnDie;
     }
 
     void Update()
@@ -43,7 +50,8 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDestroy()
     {
-        _heatlth.OnReaction -= Reaction;
+        heatlth.OnReaction -= Reaction;
+        heatlth.OnDieBecome -= OnDie;
     }
 
     private void EngageTarget()
@@ -69,12 +77,27 @@ public class EnemyAI : MonoBehaviour
     {
         transform.LookAt(target.transform);
         animator.SetBool("attack", true);
-
+        
     }
 
     private void Reaction()
     {
-        animator.SetTrigger("reaction");
+        animator.SetTrigger("onReaction");
+        audioSourceEnemy.PlayOneShot(fxSound[4]);
+    }
+
+    private void Reload()
+    {
+        animator.SetTrigger("onReload");
+        audioSourceEnemy.PlayOneShot(fxSound[1]);
+        audioSourceEnemy.PlayOneShot(fxSound[2]);
+        audioSourceEnemy.PlayOneShot(fxSound[3]);
+    }
+
+    private void OnDie()
+    {
+        animator.SetTrigger("onDie");
+        audioSourceEnemy.PlayOneShot(fxSound[5]);
     }
 
 
