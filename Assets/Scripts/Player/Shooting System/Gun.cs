@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEditor.Experimental.GraphView;
 
 public abstract class Gun : MonoBehaviour
 {
 
     [SerializeField] protected float bulletSpeed;
     [SerializeField] public int currentAmmo; // current amount bullets in the gun
-    [SerializeField] public int maxAmmo; // 
+    [SerializeField] public int maxAmmoStart = 30; // 
     [SerializeField] public int magazine;
     [SerializeField] protected int damage = 25;
     [SerializeField] protected float reloadTime;
@@ -32,13 +31,13 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] private AudioClip[] fxSound;
     AudioSource audioSourcePlayer;
 
-
-
+    protected int maxAmmo;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         audioSourcePlayer = GetComponent<AudioSource>();
+        maxAmmo = maxAmmoStart;
 
 
 
@@ -53,8 +52,9 @@ public abstract class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && maxAmmo > 0)
         {
             StartCoroutine(Reload());
+
             audioSourcePlayer.PlayOneShot(fxSound[1]);
-            audioSourcePlayer.PlayOneShot(fxSound[2]);
+            //audioSourcePlayer.PlayOneShot(fxSound[2]);
             audioSourcePlayer.PlayOneShot(fxSound[3]);
             Debug.Log($"maxAmmo {maxAmmo}");
             return;
@@ -67,6 +67,12 @@ public abstract class Gun : MonoBehaviour
         else
         {
             currentDelay -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.E) && maxAmmo == 0)
+        {
+            maxAmmo = maxAmmoStart;
+            Debug.Log($"maxAmmo {maxAmmo}");
+
         }
 
 
@@ -106,6 +112,7 @@ public abstract class Gun : MonoBehaviour
         isReloading = false;
         
     }
+
 
     private void ProcessRaycast()
     {

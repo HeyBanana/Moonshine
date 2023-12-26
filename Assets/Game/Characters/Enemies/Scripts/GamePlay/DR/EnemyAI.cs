@@ -90,7 +90,7 @@ public class EnemyAI : MonoBehaviour
     {
         animator.SetTrigger("onReload");
         audioSourceEnemy.PlayOneShot(fxSound[1]);
-        audioSourceEnemy.PlayOneShot(fxSound[2]);
+        //audioSourceEnemy.PlayOneShot(fxSound[2]);
         audioSourceEnemy.PlayOneShot(fxSound[3]);
     }
 

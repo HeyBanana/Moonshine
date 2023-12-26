@@ -34,6 +34,11 @@ public class Health : MonoBehaviour
     {
         CurrentHeath -= damage;
 
+        if (CurrentHeath < 0)
+        {
+            CurrentHeath = 0;
+        }
+
         OnDamaged?.Invoke(CurrentHeath, _maxHealth);
 
         if (CurrentHeath <= 0)

@@ -2433,6 +2433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _score: 100
   timeToDestroy: 10
 --- !u!82 &5486159021521834049
 AudioSource:
@@ -2444,7 +2445,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1c7c1f8f1e1c7fb4f94649a51f406d9b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2543,6 +2544,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  fxSound:
+  - {fileID: 8300000, guid: 1c7c1f8f1e1c7fb4f94649a51f406d9b, type: 3}
+  - {fileID: 8300000, guid: e2a49102980bc114499c9bfdddcd000a, type: 3}
+  - {fileID: 8300000, guid: 18e9a3f49b3ad4d4985f8d05bcca8247, type: 3}
+  - {fileID: 8300000, guid: e2a49102980bc114499c9bfdddcd000a, type: 3}
+  - {fileID: 8300000, guid: 98f450d217d58254593f3d7e467eac03, type: 3}
+  - {fileID: 8300000, guid: 848ebbb0cd787fe4692bc966bb6ebdfb, type: 3}
 --- !u!1 &7842955095667949628
 GameObject:
   m_ObjectHideFlags: 0

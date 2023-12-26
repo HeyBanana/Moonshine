@@ -30,16 +30,24 @@ public class State
     protected State nextState;
     protected NavMeshAgent agent;
 
+    protected AudioSource audioSourceEnemy;
+    protected Health heatlth;
+    protected AI enemyAI;
+
     float visDist = 10.0f;
     float visAngle = 30.0f;
     float shootDist = 7.0f;
 
-    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
+    public State(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+                    AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
     {
         npc = _npc;
         agent = _agent;
         anim = _anim;
         player = _player;
+        audioSourceEnemy = _audioSourceEnemy;
+        heatlth = _heatlth;
+        enemyAI = _enemyAI;
         stage = EVENT.ENTER;
     }
 
@@ -113,8 +121,9 @@ public class State
 
 public class Idle : State
 {
-    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+                AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
+        : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
     {
         name = STATE.IDLE;
     }
@@ -130,13 +139,13 @@ public class Idle : State
         if (CanSeePlayer())
         {
 
-            nextState = new Pursue(npc, agent, anim, player);
+            nextState = new Pursue(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
         else if (Random.Range(0, 100) < 10)
         {
 
-            nextState = new Patrol(npc, agent, anim, player);
+            nextState = new Patrol(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
     }
@@ -153,8 +162,9 @@ public class Patrol : State
 
     int currentIndex = -1;
 
-    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+            AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
+    : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
     {
         name = STATE.PATROL;
         agent.speed = 2.0f;
@@ -210,13 +220,13 @@ public class Patrol : State
 
         if (CanSeePlayer())
         {
-            nextState = new Pursue(npc, agent, anim, player);
+            nextState = new Pursue(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
         else if (IsPlayerBehind())
         {
 
-            nextState = new RunAway(npc, agent, anim, player);
+            nextState = new RunAway(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
     }
@@ -230,8 +240,9 @@ public class Patrol : State
 
 public class Pursue : State
 {
-    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+            AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
+    : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
     {
         name = STATE.PURSUE;
         agent.speed = 5.0f;
@@ -254,13 +265,13 @@ public class Pursue : State
             if (CanAttackPlayer())
             {
 
-                nextState = new Attack(npc, agent, anim, player);
+                nextState = new Attack(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
                 stage = EVENT.EXIT;
             }
             else if (!CanSeePlayer())
             {
 
-                nextState = new Patrol(npc, agent, anim, player);
+                nextState = new Patrol(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
                 stage = EVENT.EXIT;
             }
         }
@@ -276,24 +287,24 @@ public class Pursue : State
 public class Attack : State
 {
     float rotationSpeed = 2.0f;
-    AudioSource shoot;
+    //AudioSource audioSourceEnemy;
     //Health heatlth;
-    
+    //AI enemyAI;
 
-    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+
+    public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+            AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
+    : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
     {
         name = STATE.ATTACK;
-        shoot = _npc.GetComponent<AudioSource>();
-        //heatlth = _npc.GetComponent<Health>();
-        //heatlth.OnReaction += Reaction;
+        heatlth.OnReaction += Reaction;
     }
 
     public override void Enter()
     {
         anim.SetTrigger("isShooting");
         agent.isStopped = true;
-        shoot.Play();
+        audioSourceEnemy.PlayOneShot(enemyAI.FxSound[0]);
         base.Enter();
     }
 
@@ -310,8 +321,8 @@ public class Attack : State
         if (!CanAttackPlayer())
         {
 
-            nextState = new Idle(npc, agent, anim, player);
-            shoot.Stop();
+            nextState = new Idle(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
+            //shoot.Stop();
             stage = EVENT.EXIT;
         }
     }
@@ -333,8 +344,9 @@ public class RunAway : State
 {
     GameObject safeLocation;
 
-    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
-        : base(_npc, _agent, _anim, _player)
+    public RunAway(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
+            AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
+    : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
     {
         name = STATE.RUNAWAY;
         safeLocation = GameObject.FindGameObjectWithTag("Safe");
@@ -354,7 +366,7 @@ public class RunAway : State
         if (agent.remainingDistance < 1.0f)
         {
 
-            nextState = new Idle(npc, agent, anim, player);
+            nextState = new Idle(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
     }
