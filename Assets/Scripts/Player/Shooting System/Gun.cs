@@ -7,9 +7,9 @@ public abstract class Gun : MonoBehaviour
 {
 
     [SerializeField] protected float bulletSpeed;
-    [SerializeField] public int currentAmmo; // current amount bullets in the gun
-    [SerializeField] public int maxAmmoStart = 30; // 
-    [SerializeField] public int magazine;
+    [SerializeField] protected int currentAmmo; // current amount bullets in the gun
+    [SerializeField] protected int maxAmmoStart = 30; // 
+    [SerializeField] protected int magazine;
     [SerializeField] protected int damage = 25;
     [SerializeField] protected float reloadTime;
     [SerializeField] protected Transform gunPointer;
@@ -38,8 +38,6 @@ public abstract class Gun : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSourcePlayer = GetComponent<AudioSource>();
         maxAmmo = maxAmmoStart;
-
-
 
     }
     private void Update()
@@ -72,11 +70,7 @@ public abstract class Gun : MonoBehaviour
         {
             maxAmmo = maxAmmoStart;
             Debug.Log($"maxAmmo {maxAmmo}");
-
         }
-
-
-
     }
 
     public void Shoot()
@@ -110,7 +104,6 @@ public abstract class Gun : MonoBehaviour
         maxAmmo = residue;
         currentAmmo = magazine;   
         isReloading = false;
-        
     }
 
 
@@ -147,7 +140,5 @@ public abstract class Gun : MonoBehaviour
         }
 
     }
-
-
 
 }

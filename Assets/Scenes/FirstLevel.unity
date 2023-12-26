@@ -46467,6 +46467,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1679903403}
+    - target: {fileID: 7812716653372681922, guid: 477a2b8f23626ed4f89880835e07e1f7,
+        type: 3}
+      propertyPath: fxSound.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: f45d7a928818c2247846115f769a2d60, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83328,7 +83333,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9ea8441910ceba843be62a72018383a1, type: 3}
   - {fileID: 8300000, guid: fbc7353b0ef20e6479b8916b90b3bf51, type: 3}
   - {fileID: 8300000, guid: 18e9a3f49b3ad4d4985f8d05bcca8247, type: 3}
-  - {fileID: 8300000, guid: 7a56b5bfee2417247af4b1ba6dc0d2ef, type: 3}
+  - {fileID: 8300000, guid: 080b84e8542d1964eb1b67a44a3bd92d, type: 3}
   - {fileID: 8300000, guid: c042c3f68fb149e41ba133321afd480a, type: 3}
 --- !u!4 &920499819279775958
 Transform:

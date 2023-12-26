@@ -6,27 +6,18 @@ using UnityEngine;
 public class WeaponEnemy : MonoBehaviour
 {
 
-    [SerializeField] GameObject revolverEnemy;
-    [SerializeField] float range = 100f;
-    [SerializeField] int damage = 25;
-    [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitEffectWall;
-    [SerializeField] GameObject hitEffectBlood;
-    [SerializeField] EnemyAttack enemyAttack;
+    [SerializeField] private GameObject revolverEnemy;
+    [SerializeField] private float range = 100f;
+    [SerializeField] private int damage = 25;
+    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject hitEffectWall;
+    [SerializeField] private GameObject hitEffectBlood;
+    [SerializeField] private EnemyAttack enemyAttack;
 
 
     private void Start()
     {
         enemyAttack.OnShoot += Shoot;
-    }
-
-    void Update()
-    {
-        //if (Input.GetButtonDown("Fire1"))
-        //{
-        //    Shoot();
-        //}
-                
     }
 
     private void OnDestroy()
@@ -38,7 +29,6 @@ public class WeaponEnemy : MonoBehaviour
     {
         PlayMuzzleFlash();
         ProcessRaycast();
-
     }
 
     private void PlayMuzzleFlash()

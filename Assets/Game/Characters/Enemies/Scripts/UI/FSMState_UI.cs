@@ -11,10 +11,10 @@ public class FSMState_UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI _fsmState;
 
     //public IFSMNaming fSMNaming;
-    AI testingEvents;
+    private AI testingEvents;
 
 
-    void Start()
+    private void Start()
     {
         testingEvents = GetComponent<AI>();
         _fsmName.text = testingEvents.NameFSM;

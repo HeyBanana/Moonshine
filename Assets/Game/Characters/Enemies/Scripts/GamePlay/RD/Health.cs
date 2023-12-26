@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] int _maxHealth = 100;
-    [SerializeField] int _score = 100;
+    [SerializeField] private int _maxHealth = 100;
+    [SerializeField] private int _score = 100;
 
-    [SerializeField] float timeToDestroy = 10f;
-    Animator animator;
+    [SerializeField] private float timeToDestroy = 10f;
+    private Animator animator;
 
     public int CurrentHeath { get; private set; }
 
@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
 
     //public GameBehavior gameBehavior;
 
-    void Awake()
+    private void Awake()
     {
         CurrentHeath = _maxHealth;
     }
@@ -53,7 +53,7 @@ public class Health : MonoBehaviour
 
     }
 
-    void OnDie()
+    private void OnDie()
     {
         if (gameObject.tag == "Player")
         {
@@ -63,7 +63,6 @@ public class Health : MonoBehaviour
         }
         else
         {
-            //animator.SetTrigger("onDie");
             OnDieBecome?.Invoke();
             OnScoreChanged?.Invoke(_score);
             Destroy(gameObject, timeToDestroy);

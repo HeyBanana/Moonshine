@@ -7,23 +7,23 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Button winButton;
-    public Button lossButton;
+    [SerializeField] private Button winButton;
+    [SerializeField] private Button lossButton;
 
-    [SerializeField] int maxItems = 4;
-    [SerializeField] TMP_Text healthText;
-    [SerializeField] TMP_Text itemText;
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text progressText;
+    [SerializeField] private int maxItems = 4;
+    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TMP_Text itemText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text progressText;
 
-    [SerializeField] List<Health> _heatlth;
-    [SerializeField] List<EnemyBehavior> _heatlthOldVersion;
+    [SerializeField] private List<Health> _heatlth;
+    [SerializeField] private List<EnemyBehavior> _heatlthOldVersion;
 
     private int _itemsCollected = 0;
     private int _playerHP = 10;
     private int _scoreEnemy = 0;
 
-    void Start()
+    private void Start()
     {
         itemText.text += _itemsCollected;
         healthText.text += _playerHP;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int Items
+    private int Items
     {
         get { return _itemsCollected; }
         set
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int HP
+    private int HP
     {
         get { return _playerHP; }
         set
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int Score
+    private int Score
     {
         get { return _scoreEnemy; }
         set
@@ -95,19 +95,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnScoreUpdate(int score)
+    private void OnScoreUpdate(int score)
     {
         Score += score;
     }
 
-    public void RestartScene()
+    private void RestartScene()
     {
         SceneManager.LoadScene(0);
 
         Time.timeScale = 1f;
     }
 
-    public void UpdateScene(string updatedText)
+    private void UpdateScene(string updatedText)
     {
         progressText.text = updatedText;
         Time.timeScale = 0f;

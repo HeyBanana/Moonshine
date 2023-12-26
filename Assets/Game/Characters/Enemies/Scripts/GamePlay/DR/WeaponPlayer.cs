@@ -6,13 +6,13 @@ using UnityEngine;
 public class WeaponPlayer : MonoBehaviour
 {
 
-    [SerializeField] GameObject revolverPlayer;
-    [SerializeField] float range = 100f;
-    [SerializeField] int damage = 25;
-    [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitEffectWall;
-    [SerializeField] GameObject hitEffectBlood;
-    void Update()
+    [SerializeField] private GameObject revolverPlayer;
+    [SerializeField] private float range = 100f;
+    [SerializeField] private int damage = 25;
+    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private GameObject hitEffectWall;
+    [SerializeField] private GameObject hitEffectBlood;
+    private void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
@@ -43,7 +43,6 @@ public class WeaponPlayer : MonoBehaviour
             Health target = hit.transform.GetComponent<Health>();
             if (target == null) { return; }
             target.Damage(damage);
-
         }
         else
         {

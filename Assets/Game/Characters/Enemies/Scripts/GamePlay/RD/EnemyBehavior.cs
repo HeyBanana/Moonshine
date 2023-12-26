@@ -6,9 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    [SerializeField] Transform patrolRoute;
-    [SerializeField] List<Transform> locations;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform patrolRoute;
+    [SerializeField] private List<Transform> locations;
 
     public event Action<int> OnScoreOldVersionChanged;
 
@@ -28,13 +28,11 @@ public class EnemyBehavior : MonoBehaviour
                 OnScoreOldVersionChanged?.Invoke(100);
 
                 Debug.Log("Enemy down.");
-
             }
         }
     }
 
-
-    void Start()
+    private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player").transform;
@@ -44,7 +42,7 @@ public class EnemyBehavior : MonoBehaviour
         MoveToNextPatrolLocation();
     }
 
-    void Update()
+    private void Update()
     {
         if (_agent.remainingDistance < 0.2f && !_agent.pathPending)
         {
@@ -69,7 +67,6 @@ public class EnemyBehavior : MonoBehaviour
         }
 
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

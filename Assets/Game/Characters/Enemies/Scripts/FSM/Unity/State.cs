@@ -61,7 +61,6 @@ public class State
         if (stage == EVENT.UPDATE) Update();
         if (stage == EVENT.EXIT)
         {
-
             Exit();
             return nextState;
         }
@@ -138,7 +137,6 @@ public class Idle : State
     {
         if (CanSeePlayer())
         {
-
             nextState = new Pursue(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
             stage = EVENT.EXIT;
         }
@@ -159,7 +157,6 @@ public class Idle : State
 
 public class Patrol : State
 {
-
     int currentIndex = -1;
 
     public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
@@ -189,7 +186,6 @@ public class Patrol : State
             float distance = Vector3.Distance(npc.transform.position, thisWP.transform.position);
             if (distance < lastDistance)
             {
-
                 currentIndex = i - 1;
                 lastDistance = distance;
             }
@@ -203,15 +199,12 @@ public class Patrol : State
     {
         if (agent.remainingDistance < 1)
         {
-
             if (currentIndex >= GameEnvironment.Singleton.Checkpoints.Count - 1)
             {
-
                 currentIndex = 0;
             }
             else
             {
-
                 currentIndex++;
             }
 
@@ -287,11 +280,7 @@ public class Pursue : State
 public class Attack : State
 {
     float rotationSpeed = 2.0f;
-    //AudioSource audioSourceEnemy;
-    //Health heatlth;
-    //AI enemyAI;
-
-
+    
     public Attack(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player,
             AudioSource _audioSourceEnemy, Health _heatlth, AI _enemyAI)
     : base(_npc, _agent, _anim, _player, _audioSourceEnemy, _heatlth, _enemyAI)
@@ -322,7 +311,6 @@ public class Attack : State
         {
 
             nextState = new Idle(npc, agent, anim, player, audioSourceEnemy, heatlth, enemyAI);
-            //shoot.Stop();
             stage = EVENT.EXIT;
         }
     }
@@ -330,7 +318,6 @@ public class Attack : State
     public override void Exit()
     {
         anim.ResetTrigger("isShooting");
-        //heatlth.OnReaction -= Reaction;
         base.Exit();
     }
 

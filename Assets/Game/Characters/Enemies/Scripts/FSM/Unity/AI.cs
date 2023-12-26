@@ -9,7 +9,6 @@ public class AI : MonoBehaviour, IFSMNaming
     public event EventHandler OnSpacePressed;
     public event Action<State> OnCurrentState;
 
-
     AudioSource audioSourceEnemy;
     Health heatlth;
     AI enemyAI;
@@ -28,7 +27,7 @@ public class AI : MonoBehaviour, IFSMNaming
         get { return "FSM Unity"; }
     }
 
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -43,7 +42,7 @@ public class AI : MonoBehaviour, IFSMNaming
 
     }
 
-    void Update()
+    private void Update()
     {
         currentState = currentState.Process();
 

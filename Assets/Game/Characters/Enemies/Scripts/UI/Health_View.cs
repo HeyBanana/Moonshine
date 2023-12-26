@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class Health_View : MonoBehaviour
 {
-    [SerializeField] Health _heatlth;
-    [SerializeField] Image _progressBar;
-    [SerializeField] TextMeshProUGUI _healthCount;
+    [SerializeField] private Health _heatlth;
+    [SerializeField] private Image _progressBar;
+    [SerializeField] private TextMeshProUGUI _healthCount;
     private void Start()
     {
        // heatlth = gameObject.GetComponent<Health>();

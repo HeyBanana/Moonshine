@@ -6,22 +6,21 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] Transform target;
-    [SerializeField] float chaseRange = 6f;
-
+    [SerializeField] private Transform target;
+    [SerializeField] private float chaseRange = 6f;
+    [SerializeField] private Health heatlth;
     [SerializeField] private AudioClip[] fxSound;
+    
     AudioSource audioSourceEnemy;
-
-    [SerializeField] Health heatlth;
+    NavMeshAgent navMeshAgent;
+    Animator animator;
 
     public AudioClip[] FxSound { get { return fxSound; } }
 
-
-    NavMeshAgent navMeshAgent;
-    Animator animator;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
-    void Start()
+
+    private void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -32,7 +31,7 @@ public class EnemyAI : MonoBehaviour
         heatlth.OnDieBecome += OnDie;
     }
 
-    void Update()
+    private void Update()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 
@@ -43,7 +42,6 @@ public class EnemyAI : MonoBehaviour
         else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;           
-
         }
 
     }
@@ -77,7 +75,6 @@ public class EnemyAI : MonoBehaviour
     {
         transform.LookAt(target.transform);
         animator.SetBool("attack", true);
-        
     }
 
     private void Reaction()
@@ -90,7 +87,6 @@ public class EnemyAI : MonoBehaviour
     {
         animator.SetTrigger("onReload");
         audioSourceEnemy.PlayOneShot(fxSound[1]);
-        //audioSourceEnemy.PlayOneShot(fxSound[2]);
         audioSourceEnemy.PlayOneShot(fxSound[3]);
     }
 
