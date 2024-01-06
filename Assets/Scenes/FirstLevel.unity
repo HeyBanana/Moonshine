@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5179,6 +5179,18 @@ PrefabInstance:
       addedObject: {fileID: 1324227244}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d728e5e944083c40b015cb1bb3dbd8a, type: 3}
+--- !u!114 &119717246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8381966536605197289, guid: e093822b849c3a24780f409243d6b996,
+    type: 3}
+  m_PrefabInstance: {fileID: 459763453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ba5bd51a7f6e549b63a042353b6044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &121120090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17434,6 +17446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cowboy
       objectReference: {fileID: 0}
+    - target: {fileID: 4289041265064434676, guid: e093822b849c3a24780f409243d6b996,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4299382353562903146, guid: e093822b849c3a24780f409243d6b996,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17484,10 +17501,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8381966536605197289, guid: e093822b849c3a24780f409243d6b996,
+        type: 3}
+      propertyPath: delay
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2336318233219152447, guid: e093822b849c3a24780f409243d6b996,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1679903405}
   m_SourcePrefab: {fileID: 100100000, guid: e093822b849c3a24780f409243d6b996, type: 3}
 --- !u!1 &459763454 stripped
 GameObject:
@@ -64743,6 +64769,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 459763453}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1679903405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459763454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22fba00139bad448995b12c16338b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 119717246}
 --- !u!4 &1681823612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4274554277770894, guid: 6ced95f04487bec4e81f51a934884b80,

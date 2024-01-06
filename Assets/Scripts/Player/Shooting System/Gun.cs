@@ -18,10 +18,10 @@ public abstract class Gun : MonoBehaviour
     
     protected float currentDelay;
     protected int reason; // difference between full magazine and some bullets we shooted
-    protected bool isReloading = false;
+    public bool isReloading;
     protected int residue; //difference between full magazine and some bullets we shooted
     public Animator animator;
-    protected bool isShooting = false;
+    public bool isShooting;
 
     [SerializeField] float range = 100f;
     [SerializeField] ParticleSystem muzzleFlash;
@@ -34,59 +34,59 @@ public abstract class Gun : MonoBehaviour
     protected int maxAmmo;
 
     private void Awake()
-    {
-        animator = GetComponent<Animator>();
+    {    
         audioSourcePlayer = GetComponent<AudioSource>();
-        maxAmmo = maxAmmoStart;
-
     }
     private void Update()
     {
-
-        if (isReloading)
+        if (currentAmmo > 0 && isShooting)
         {
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.R) && maxAmmo > 0)
-        {
-            StartCoroutine(Reload());
-
-            audioSourcePlayer.PlayOneShot(fxSound[1]);
-            //audioSourcePlayer.PlayOneShot(fxSound[2]);
-            audioSourcePlayer.PlayOneShot(fxSound[3]);
-            Debug.Log($"maxAmmo {maxAmmo}");
-            return;
-        }
-        if (Input.GetMouseButtonDown(0) && currentAmmo > 0)
-        {
-            Shoot();
-            Debug.Log(currentAmmo);
+            Shoot();     
         }
         else
         {
             currentDelay -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.E) && maxAmmo == 0)
+
+        if (isReloading)
         {
-            maxAmmo = maxAmmoStart;
-            Debug.Log($"maxAmmo {maxAmmo}");
+
+            Reload();
+            audioSourcePlayer.PlayOneShot(fxSound[1]);
+            //audioSourcePlayer.PlayOneShot(fxSound[2]);
+            audioSourcePlayer.PlayOneShot(fxSound[3]);
+            
+            return;
         }
+
     }
 
     public void Shoot()
     {
-        if (currentDelay > 0)
+        if (currentDelay > 0 )
+        {
             return;
-
-        //Rigidbody bulletInstance = Instantiate(bulletPrefab, gunPointer.position, gunPointer.rotation);
-        //bulletInstance.velocity = gunPointer.forward * bulletSpeed;
-
+        }
+     
         PlayMuzzleFlash();
         ProcessRaycast();
+        Debug.Log("Shooting");
         audioSourcePlayer.PlayOneShot(fxSound[0]);
 
         currentDelay = delay;
         currentAmmo--;
+    }
+
+    public void Reload()
+    {
+        if (isReloading)
+        {
+            return;
+        }
+        isReloading = true;
+
+        StartCoroutine(PerformReload());
+        Debug.Log("Reloading");
     }
 
     private void PlayMuzzleFlash()
@@ -94,15 +94,17 @@ public abstract class Gun : MonoBehaviour
         muzzleFlash.Play();
     }
 
-    public IEnumerator Reload()
+    public IEnumerator PerformReload()
     {
-        isReloading = true;
-        Debug.Log("Reloading");        
+        
+            
         yield return new WaitForSeconds(reloadTime);
+
         reason = magazine - currentAmmo;
         residue = maxAmmo - reason;
         maxAmmo = residue;
-        currentAmmo = magazine;   
+        currentAmmo = magazine;  
+        
         isReloading = false;
     }
 
