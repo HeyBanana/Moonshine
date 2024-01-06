@@ -6,37 +6,36 @@ using UnityEngine;
 public abstract class Gun : MonoBehaviour
 {
 
-    [SerializeField] protected float bulletSpeed;
+    public delegate void ShootAction();
+    public static event ShootAction OnShoot;
+
+    [SerializeField] protected float bulletSpeed; // bullet speed
     [SerializeField] protected int currentAmmo; // current amount bullets in the gun
-    [SerializeField] protected int maxAmmoStart = 30; // 
-    [SerializeField] protected int magazine;
-    [SerializeField] protected int damage = 25;
-    [SerializeField] protected float reloadTime;
-    [SerializeField] protected Transform gunPointer;
-    [SerializeField] protected Rigidbody bulletPrefab;
-    [SerializeField] protected float delay;
-    
-    protected float currentDelay;
-    protected int reason; // difference between full magazine and some bullets we shooted
+    [SerializeField] protected int magazine; // magazine our weapon
+    [SerializeField] protected int damage = 25; // damage which we inflict to the enemy
+    [SerializeField] protected float reloadTime; // time before start reloading and finished
+    [SerializeField] protected Transform gunPointer; // the point from which the beam is sent
+    [SerializeField] protected float delay; // delay between shootings
+    [SerializeField] protected int maxAmmo;
+    private float currentDelay; 
+    private int reason; // difference between full magazine and some bullets we shooted
     public bool isReloading;
-    protected int residue; //difference between full magazine and some bullets we shooted
-    public Animator animator;
+    private int residue; //difference between full magazine and some bullets we shooted
+    private Animator animator; // animator our player
     public bool isShooting;
-
-    [SerializeField] float range = 100f;
-    [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitEffectWall;
-    [SerializeField] GameObject hitEffectBlood;
-
+    [SerializeField] float range = 100f; // rang we can shoot
+    [SerializeField] ParticleSystem muzzleFlash; // particle system
+    [SerializeField] GameObject hitEffectWall; // hit enviroment
+    [SerializeField] GameObject hitEffectBlood; // hit enemy
     [SerializeField] private AudioClip[] fxSound;
     AudioSource audioSourcePlayer;
 
-    protected int maxAmmo;
 
     private void Awake()
     {    
         audioSourcePlayer = GetComponent<AudioSource>();
     }
+
     private void Update()
     {
         if (currentAmmo > 0 && isShooting)
@@ -50,15 +49,12 @@ public abstract class Gun : MonoBehaviour
 
         if (isReloading)
         {
-
             Reload();
             audioSourcePlayer.PlayOneShot(fxSound[1]);
             //audioSourcePlayer.PlayOneShot(fxSound[2]);
             audioSourcePlayer.PlayOneShot(fxSound[3]);
-            
             return;
         }
-
     }
 
     public void Shoot()
@@ -67,26 +63,25 @@ public abstract class Gun : MonoBehaviour
         {
             return;
         }
-     
+
         PlayMuzzleFlash();
         ProcessRaycast();
         Debug.Log("Shooting");
         audioSourcePlayer.PlayOneShot(fxSound[0]);
-
         currentDelay = delay;
         currentAmmo--;
+
+        OnShoot?.Invoke();
     }
 
     public void Reload()
     {
-        if (isReloading)
+        if (isReloading || maxAmmo<=0)
         {
             return;
         }
         isReloading = true;
-
-        StartCoroutine(PerformReload());
-        Debug.Log("Reloading");
+        StartCoroutine(PerformReload());        
     }
 
     private void PlayMuzzleFlash()
@@ -96,18 +91,14 @@ public abstract class Gun : MonoBehaviour
 
     public IEnumerator PerformReload()
     {
-        
-            
+    
         yield return new WaitForSeconds(reloadTime);
-
         reason = magazine - currentAmmo;
         residue = maxAmmo - reason;
         maxAmmo = residue;
-        currentAmmo = magazine;  
-        
+        currentAmmo = magazine;       
         isReloading = false;
     }
-
 
     private void ProcessRaycast()
     {
@@ -119,7 +110,6 @@ public abstract class Gun : MonoBehaviour
             Health target = hit.transform.GetComponent<Health>();
             if (target == null) { return; }
             target.Damage(damage);
-
         }
         else
         {
@@ -133,7 +123,6 @@ public abstract class Gun : MonoBehaviour
         {
             GameObject impatc = Instantiate(hitEffectBlood, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impatc, 1);
-
         }
         else
         {
